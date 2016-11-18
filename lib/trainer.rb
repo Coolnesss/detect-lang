@@ -51,8 +51,8 @@ class Trainer
   #  @.find_related code, amount
   #end
 
-  def training_data
-    gists = JSON.parse(RestClient.get("https://api.github.com/gists/public?per_page=30"))
+  def training_data(per_page=30)
+    gists = JSON.parse(RestClient.get("https://api.github.com/gists/public?per_page=#{per_page}"))
     github = Github.new oauth_token: ENV["GITHUB_TOKEN"]
 
     gists.each do |gist|
@@ -66,5 +66,11 @@ class Trainer
       end
     end
     true
+  end
+
+  def fetch_data(iterations=10, per_page=30)
+    iterations.times do
+      training_data(per_page)
+    end
   end
 end
