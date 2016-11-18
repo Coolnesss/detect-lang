@@ -1,0 +1,9 @@
+<h1>Language Detector</h1>
+
+
+<p> Hi, input some code</p>
+<%= form_tag("/analyze", method: "post") do %>
+  <%= label_tag(:code, "Code:") %>
+  <%= text_area_tag(:code) %>
+  <%= submit_tag("Submit code") %>
+<% end %>
